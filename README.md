@@ -13,29 +13,27 @@ It is a **C++ engineering project** that rebuilds the YOLOv8 inference structure
 
 .
 ├── CMakeLists.txt
-├── CMakeLists.txt.user
-├── include
+├── include/
 │   ├── common_utils.h
-│   ├── lib
-│   │   ├── libthread_pool.so
-│   │   ├── libyolov8_tracking.so -> libyolov8_tracking.so.1
-│   │   ├── libyolov8_tracking.so.1 -> libyolov8_tracking.so.1.0.0
-│   │   └── libyolov8_tracking.so.1.0.0
 │   ├── model_wrapper.h
 │   ├── result_processor.h
-│   ├── src
-│   │   ├── thread_pool.h
-│   │   └── tracking.h
 │   ├── tracker_wrapper.h
 │   └── video_capture.h
+├── src/
+│   ├── common_utils.cc
+│   ├── model_wrapper.cc
+│   ├── result_processor.cc
+│   ├── tracker_wrapper.cc
+│   └── video_capture.cc
 ├── main.cc
-├── README.md
-└── src
-    ├── common_utils.cc
-    ├── model_wrapper.cc
-    ├── result_processor.cc
-    ├── tracker_wrapper.cc
-    └── video_capture.cc
+├── postprocess.cc / postprocess.h
+├── rknpu1/
+│   └── yolov8.cc
+├── rknpu2/
+│   ├── yolov8_rv1106_1103.cc
+│   ├── yolov8_zero_copy.cc
+│   └── yolov8.cc
+└── yolov8.h
 
 
 ## 🧠 Key Features
