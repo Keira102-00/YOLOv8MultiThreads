@@ -1,137 +1,159 @@
-# 🧩 YOLOv8 Multi-Threads Inference on RK3588
-### Overview
+# YOLOv8 Multi-Threaded Inference on RK3588
 
-This project implements a multi-threaded inference pipeline for the YOLOv8 model on Rockchip RK3588 devices.
-The main goal is to improve frame processing efficiency by leveraging parallel video capture, inference, and postprocessing threads.
+### 🚀 Overview
+This project implements a **multi-threaded YOLOv8 inference pipeline** on the **Rockchip RK3588 platform**, focusing on optimizing **CPU+NPU hybrid execution efficiency**.  
+It is a **C++ engineering project** that rebuilds the YOLOv8 inference structure for better modularity, scalability, and real-time performance.
 
-Unlike a typical YOLOv8 demo, this version has been engineered for scalability and modularity — the C++ codebase has been restructured for multi-threaded workloads and better integration with external tracking and inference libraries.
+> ⚙️ Note: This repository demonstrates **multi-threaded system design** and **inference pipeline engineering**, not a plug-and-play demo.  
+> It requires Rockchip-specific dependencies, prebuilt libraries, and model files to run properly.
 
-⚠️ Due to dependencies on proprietary SDKs and hardware-accelerated libraries, this repository cannot run standalone.
-It serves primarily as an engineering reference for multi-thread design and RKNN-based deployment structure.
+---
 
-## 🧱 Project Structure
-```bash
+## 🧩 Project Structure
+
 .
 ├── CMakeLists.txt
-├── include/
+├── CMakeLists.txt.user
+├── include
 │   ├── common_utils.h
+│   ├── lib
+│   │   ├── libthread_pool.so
+│   │   ├── libyolov8_tracking.so -> libyolov8_tracking.so.1
+│   │   ├── libyolov8_tracking.so.1 -> libyolov8_tracking.so.1.0.0
+│   │   └── libyolov8_tracking.so.1.0.0
 │   ├── model_wrapper.h
 │   ├── result_processor.h
-│   ├── tracker_wrapper.h
-│   ├── video_capture.h
-│   ├── src/
+│   ├── src
 │   │   ├── thread_pool.h
 │   │   └── tracking.h
-│   ├── lib/
-│   │   ├── libthread_pool.so
-│   │   ├── libyolov8_tracking.so -> libyolov8_tracking.so.1.0.0
-│   │   └── libyolov8_tracking.so.1.0.0
-│   └── ...
-├── src/
-│   ├── common_utils.cc
-│   ├── model_wrapper.cc
-│   ├── result_processor.cc
-│   ├── tracker_wrapper.cc
-│   ├── video_capture.cc
+│   ├── tracker_wrapper.h
+│   └── video_capture.h
 ├── main.cc
-├── postprocess.cc
-├── yolov8.h
-├── rknpu1/
-│   └── yolov8.cc
-└── rknpu2/
-    ├── yolov8.cc
-    ├── yolov8_rv1106_1103.cc
-    └── yolov8_zero_copy.cc
-```
+├── README.md
+└── src
+    ├── common_utils.cc
+    ├── model_wrapper.cc
+    ├── result_processor.cc
+    ├── tracker_wrapper.cc
+    └── video_capture.cc
 
-## ✨ Key Features
 
-### Multi-threaded Inference Framework
+## 🧠 Key Features
 
-Independent threads for video capture, model inference, and result visualization.
+- **Thread Pool Design:**  
+  Custom C++ thread pool (`thread_pool.h`) to manage multi-stream inference efficiently.  
+  Tasks include model inference, postprocessing, and video I/O handling.
 
-Thread synchronization through a custom thread pool implementation.
+- **Modularized Architecture:**  
+  Split into logical modules:  
+  `model_wrapper`, `tracker_wrapper`, `result_processor`, and `video_capture`.
 
-### Modular Design
+- **RK3588 NPU + CPU Hybrid Inference:**  
+  Supports **RKNPU1** and **RKNPU2** modes (under `/rknpu1` and `/rknpu2/`)  
+  for flexible deployment across Rockchip platforms.
 
-model_wrapper.cc abstracts RKNN model handling.
+- **Optimized Engineering Structure:**  
+  Rewritten most of the original C++ directory to improve readability, maintainability, and reusability.
 
-video_capture.cc supports decoupled input frame pipeline.
+- **Precompiled Shared Libraries:**  
+  `libthread_pool.so` and `libyolov8_tracking.so` are provided for linking.
 
-result_processor.cc handles postprocessing and visualization logic.
+---
 
-### Lightweight Tracking Integration
+## 🧍‍♂️ My Contribution
 
-Supports real-time tracking integration via libyolov8_tracking.so.
+> This project was originally a single-threaded inference demo.  
+> I **refactored and rebuilt most of the C++ directory**, introducing:
+>
+> - A complete **multi-threaded inference pipeline**
+> - A **CMake-based modular project structure**
+> - **Reusable utility layers** for data processing and result management
+> - Integration of **custom thread pool** and **RKNN API calls**
+>
+> Except for `postprocess.cc/.h` and the existing NPU wrappers,  
+> **almost all files in `src/` and `include/` were written and engineered by me.**
 
-### Optimized for Embedded AI
+---
 
-Specifically designed for RK3588 NPU + CPU hybrid architecture.
+## 📸 Example Output (Recommended)
 
-## 🧠 Engineering Highlights 
+You can improve this README by adding some visual outputs like:
 
-The entire C++ refactor in the src/ and include/ directories was independently implemented,
-transforming the initial demo into a modular, multi-threaded inference framework.
+- A **console output screenshot** showing thread scheduling logs  
+- A **video frame or detection result** image
 
-### My contributions include:
+Example placeholder:
 
-Refactoring single-thread YOLOv8 demo → multi-threaded structure.
 
-Designing reusable thread pool and model wrapper modules.
+---
 
-Implementing modularized input/output abstraction (video_capture, result_processor).
+## ⚙️ Build Instructions (For reference)
 
-Engineering project build system via customized CMakeLists.
+> This section is for developers familiar with RK3588 SDK and RKNN toolkit.
 
-Integrating performance-oriented synchronization and error handling mechanisms.
-
-## ⚙️ Dependencies
-
-This project depends on several closed-source or device-specific SDKs and is not directly runnable without the following:
-
-Rockchip RKNPU Toolkit (v1 or v2)
-
-OpenCV (≥ 4.5)
-
-RKNN runtime libraries
-
-Pre-compiled .so libraries for tracking and threading
-
-## 📘 Usage (Reference Only)
 ```bash
+# Clone repository
+git clone git@github.com:Keira102-00/YOLOv8MultiThreads.git
+cd YOLOv8MultiThreads
+
+# Configure & build
 mkdir build && cd build
 cmake ..
 make -j8
-./yolov8_app [model_path] [video_source/camera id/netcamera ippwd]
 ```
+## 🧱 Dependencies
 
-## 📄 License
+| Dependency | Version / Description |
+|-------------|-----------------------|
+| **RKNN Toolkit**  | Rockchip model conversion tools |
+| **OpenCV**        | Image processing and video I/O |
+| **pthread**       | POSIX multithreading support |
+| **rknpu_runtime** | Rockchip NPU runtime libraries |
+| **C++17+**        | Required for thread pool and smart pointer usage |
 
-This repository is released for research and educational reference only.
-Please do not distribute the prebuilt libraries (.so files) without permission.
+---
 
-## 🌏 中文说明
-项目简介
+## 🧩 Future Improvements
 
-本项目为 YOLOv8 模型在 RK3588 平台上的多线程推理框架。
-旨在通过 视频采集、推理、结果处理线程的并行化 提升实时处理效率。
+- Add unified logging and profiling utilities  
+- Benchmark CPU/NPU utilization for thread scheduling  
+- Integrate asynchronous video pipeline for multi-stream input  
+- Support Python API binding (via pybind11)
 
-与传统 YOLOv8 Demo 不同，本版本针对嵌入式 AI 环境进行了系统级工程化设计，
-在保证结构清晰的同时，实现了多模块解耦、线程池复用与推理流程可扩展。
+---
 
-### 我的主要工作
+## 🌍 中文介绍
 
-重新设计并重写了 src/ 与 include/ 目录下的大部分核心逻辑；
+### 🧭 项目概述
+本项目实现了基于 **RK3588 平台的 YOLOv8 多线程推理框架**，重点在于利用 **CPU + NPU 混合架构** 提升推理性能与系统并行度。  
+整个工程使用 **C++ 重构**，模块化、可扩展，并在工程化结构上做了全面优化。
 
-实现了完整的 线程池架构 与任务分配机制；
+---
 
-将原始 Demo 工程化、模块化，使其可扩展至复杂实时任务；
+### 🧠 我的主要贡献
+- 从零构建 **多线程推理框架**（线程池、任务调度、模型封装等）  
+- 完善工程结构并引入 **CMake 模块化构建体系**  
+- 实现了 `model_wrapper`、`tracker_wrapper`、`result_processor` 等模块  
+- 重写了项目主要的 C++ 文件（除原有的后处理部分）
 
-编写 CMake 构建脚本，实现灵活模块编译；
+---
 
-在推理与结果处理之间增加同步优化，提升帧处理稳定性。
+### ⚙️ 项目特点
+- 支持 **RKNPU1 / RKNPU2** 双版本推理  
+- 支持 **自定义线程池** 实现并行推理  
+- 模块化结构清晰，可复用性高  
+- 适合展示嵌入式 AI 推理与系统工程化能力
 
-### 注意事项
+---
 
-本项目包含对 Rockchip 平台依赖的 .so 库文件及 SDK 接口，
-并非可独立运行的 Demo，主要用于展示多线程推理架构设计思路。
+### 🖼️ 建议补充
+可在 README 中加入以下内容以增强展示效果：
+- 一张 **运行日志截图**
+- 一张 **检测结果截图**（如摄像头检测画面）
+
+---
+
+**📁 Repository:** [YOLOv8MultiThreads](https://github.com/Keira102-00/YOLOv8MultiThreads)  
+**🧑‍💻 Author:** Keira102  
+**📅 Last Updated:** October 2025
+
