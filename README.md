@@ -10,7 +10,7 @@ It is a **C++ engineering project** that rebuilds the YOLOv8 inference structure
 ---
 
 ## 🧩 Project Structure
-
+```bash
 .
 ├── CMakeLists.txt
 ├── CMakeLists.txt.user
@@ -36,7 +36,7 @@ It is a **C++ engineering project** that rebuilds the YOLOv8 inference structure
     ├── result_processor.cc
     ├── tracker_wrapper.cc
     └── video_capture.cc
-
+```
 
 ## 🧠 Key Features
 
