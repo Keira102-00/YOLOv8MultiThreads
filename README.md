@@ -75,31 +75,26 @@ It is a **C++ engineering project** that rebuilds the YOLOv8 inference structure
 
 ---
 
-## 📸 Example Output (Recommended)
-
-You can improve this README by adding some visual outputs like:
+## 📸 Example Output 
+TBD
 
 - A **console output screenshot** showing thread scheduling logs  
 - A **video frame or detection result** image
 
-Example placeholder:
 
 
 ---
 
-## ⚙️ Build Instructions (For reference)
+## ⚙️ Build Instructions 
 
 > This section is for developers familiar with RK3588 SDK and RKNN toolkit.
 
 ```bash
 # Clone repository
 git clone git@github.com:Keira102-00/YOLOv8MultiThreads.git
-cd YOLOv8MultiThreads
-
-# Configure & build
-mkdir build && cd build
-cmake ..
-make -j8
+cd /path/to/yolov8/
+mv YOLOv8MultiThreads/ /path/to/yolov8/cpp/
+#recompile program and rerun
 ```
 ## 🧱 Dependencies
 
@@ -110,15 +105,6 @@ make -j8
 | **pthread**       | POSIX multithreading support |
 | **rknpu_runtime** | Rockchip NPU runtime libraries |
 | **C++17+**        | Required for thread pool and smart pointer usage |
-
----
-
-## 🧩 Future Improvements
-
-- Add unified logging and profiling utilities  
-- Benchmark CPU/NPU utilization for thread scheduling  
-- Integrate asynchronous video pipeline for multi-stream input  
-- Support Python API binding (via pybind11)
 
 ---
 
@@ -143,13 +129,6 @@ make -j8
 - 支持 **自定义线程池** 实现并行推理  
 - 模块化结构清晰，可复用性高  
 - 适合展示嵌入式 AI 推理与系统工程化能力
-
----
-
-### 🖼️ 建议补充
-可在 README 中加入以下内容以增强展示效果：
-- 一张 **运行日志截图**
-- 一张 **检测结果截图**（如摄像头检测画面）
 
 ---
 
