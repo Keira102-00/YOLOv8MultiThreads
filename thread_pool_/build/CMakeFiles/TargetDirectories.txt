@@ -1,0 +1,3 @@
+/oyf/rknn_model_zoo/examples/thread_pool_/build/CMakeFiles/thread_pool.dir
+/oyf/rknn_model_zoo/examples/thread_pool_/build/CMakeFiles/edit_cache.dir
+/oyf/rknn_model_zoo/examples/thread_pool_/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,7 @@
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/yolov8_tracking.dir
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/edit_cache.dir
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/rebuild_cache.dir
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/list_install_components.dir
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/install.dir
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/install/local.dir
+/oyf/rknn_model_zoo/examples/t2_yolov8_tracking_so_/build/CMakeFiles/install/strip.dir
