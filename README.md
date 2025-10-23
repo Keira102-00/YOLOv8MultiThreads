@@ -5,11 +5,9 @@
 > Multi-threaded YOLOv8 inference — includes the newest C++ multi-threaded implementation, and dependency library sources.
 
 ---
-<video src="/Users/fanouyang/Downloads/test_record_videos/usbcamtest.mp4" controls>
+<video src="/Users/fanouyang/YOLOv8MultiThreads/test_record_videos/usbcamtest.mp4" controls>
 </video>
-<video src="/Users/fanouyang/Downloads/test_record_videos/120fps-10s-video-test.mp4" controls>
-</video>
-<video src="/Users/fanouyang/Downloads/test_record_videos/120fps-10s-video-test-load.mp4" controls>
+<video src="/Users/fanouyang/YOLOv8MultiThreads/test_record_videos/120fps-10s-video-test-load.mp4" controls>
 </video>
 !()[npu_load.png]
 ![]
