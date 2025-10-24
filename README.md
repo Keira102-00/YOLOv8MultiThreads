@@ -1,7 +1,7 @@
 # YOLOv8MultiThreads
 
 > **多线程 YOLOv8 推理（最新 C++ 多线程版本 + 依赖库源码）**
->
+>“整个多线程架构采用任务队列 + 互斥锁保护机制，确保帧任务在多线程环境下唯一消费、结果写入安全，从而实现 CPU/NPU 协同推理的稳定并行。”
 > Multi-threaded YOLOv8 inference — includes the newest C++ multi-threaded implementation, and dependency library sources.
 
 ---
